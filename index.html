@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kutipan Perasaan 💌</title>
+  <style>
+    :root {
+      --bg-gradient-start: #ffeef2;
+      --bg-gradient-end: #ffd6e0;
+      --card-bg: #ffffff;
+      --primary: #ff4d6d;
+      --primary-hover: #ff758f;
+      --text-color: #4a4a4a;
+      --shadow: 0 12px 35px rgba(255, 77, 109, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #particle-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      bottom: -30px;
+      font-size: 1.3rem;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-108vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .music-control-floating {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 1.2rem;
+    }
+
+    .music-control-floating:hover {
+      transform: scale(1.12);
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 420px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 35px 25px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      z-index: 10;
+      position: relative;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      animation: fadeInSlide 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes fadeInSlide {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px) scale(0.96); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
+    }
+
+    .envelope-icon {
+      font-size: 5.5rem;
+      margin-bottom: 15px;
+      animation: heartPulse 1.8s infinite ease-in-out;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @keyframes heartPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    h1, h2 {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #666;
+      margin-bottom: 22px;
+    }
+
+    .slide-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 18px;
+      border: 4px solid #ffeef2;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    }
+
+    .slider-container {
+      width: 100%;
+      margin: 15px 0 20px 0;
+    }
+
+    .kangen-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 12px;
+      border-radius: 6px;
+      background: #ffd6e0;
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    .kangen-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(255, 77, 109, 0.4);
+      transition: transform 0.2s ease;
+    }
+
+    .kangen-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .percentage-display {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 10px 0 5px 0;
+    }
+
+    .slider-emoji {
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 13px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 18px rgba(255, 77, 109, 0.35);
+      width: 100%;
+      max-width: 260px;
+      margin-top: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-3deg);
+      box-shadow: 0 8px 22px rgba(255, 77, 109, 0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      box-shadow: none;
+      margin-top: 10px;
+    }
+
+    .btn-secondary:hover {
+      background: #ffeef2;
+      color: var(--primary-hover);
+    }
+
+    .ig-btn {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      box-shadow: 0 5px 18px rgba(220, 39, 67, 0.35);
+    }
+
+    .ig-btn:hover {
+      opacity: 0.95;
+      transform: translateY(-3deg);
+    }
+  </style>
+</head>
+<body>
+
+  <button class="music-control-floating" id="floatingMusicBtn" onclick="togglePlayMusic()" title="Putar/Pause Musik">🎵</button>
+  <audio id="bgMusic" loop src="lagu.mp3"></audio>
+
+  <div id="particle-container"></div>
+
+  <div class="container">
+    
+    <!-- SLIDE 0: AMPLOP AWAL -->
+    <div class="slide active" id="slide-0">
+      <div class="envelope-icon" onclick="openEnvelope()">💌</div>
+      <h1>Ada Pesan Untukmu</h1>
+      <p>Buka suratnya untuk membaca pesan spesial yang sudah aku siapkan buat kamu.</p>
+      
+      <button class="btn" onclick="openEnvelope()">Buka Surat 💌</button>
+      <button class="btn btn-secondary" id="initMusicBtn" onclick="togglePlayMusic()">🎵 Putar Musik</button>
+    </div>
+
+    <!-- SLIDE 1: FOTO 1 -->
+    <div class="slide" id="slide-1">
+      <img src="foto1.jpg" alt="Foto 1" class="slide-img" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500&auto=format&fit=crop'">
+      <h2>Hai Kamu! ✨</h2>
+      <p>Cuma mau ngingetin kalau senyum kamu selalu jadi alasan terbaik buat hari-hariku terasa jauh lebih indah.</p>
+      <button class="btn" onclick="nextSlide(2)">Lanjut ➡️</button>
+    </div>
+
+    <!-- SLIDE 2: FOTO 2 -->
+    <div class="slide" id="slide-2">
+      <img src="foto2.jpg" alt="Foto 2" class="slide-img" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&auto=format&fit=crop'">
+      <h2>Momen Manis 🌸</h2>
+      <p>Setiap detik yang dihabiskan bareng kamu itu mahal banget harganya. Terima kasih ya sudah hadir di hidupku!</p>
+      <button class="btn" onclick="nextSlide(3)">Lanjut ➡️</button>
+    </div>
+
+    <!-- SLIDE 3: INTERACTIVE MISS-YOU SLIDER -->
+    <div class="slide" id="slide-3">
+      <h2>Berapa Kangen Kamu? 🥺</h2>
+      <div class="slider-emoji" id="sliderEmoji">😊</div>
+      <div class="percentage-display" id="percentVal">100%</div>
+      <p id="kangenText">Kangen aja nih porsi standar~</p>
+
+      <div class="slider-container">
+        <input type="range" min="10" max="1000" value="100" class="kangen-slider" id="kangenRange" oninput="updateKangen(this.value)">
+      </div>
+
+      <button class="btn" onclick="nextSlide(4)">Lanjut Ke Akhir ❤️</button>
+    </div>
+
+    <!-- SLIDE 4: FOTO 3 & INSTAGRAM RESPONSE -->
+    <div class="slide" id="slide-4">
+      <img src="foto3.jpg" alt="Foto 3" class="slide-img" onerror="this.src='https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&auto=format&fit=crop'">
+      <h2>Surat Selesai 💌</h2>
+      <p>Terima kasih udah baca sampai akhir. Kirim jawaban kangen kamu langsung ke IG aku ya!</p>
+      <button class="btn ig-btn" onclick="sendToInstagram()">💬 Balas via Instagram</button>
+    </div>
+
+  </div>
+
+  <script>
+    // UBAH USERNAME INSTAGRAM DI SINI (TANPA @)
+    const instagramUsername = "keseharian_ejiiiii";
+
+    let musicStarted = false;
+    const bgMusic = document.getElementById("bgMusic");
+    const floatingMusicBtn = document.getElementById("floatingMusicBtn");
+    const initMusicBtn = document.getElementById("initMusicBtn");
+    let currentKangenValue = 100;
+
+    function togglePlayMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+          musicStarted = true;
+          floatingMusicBtn.innerText = "⏸️";
+          if (initMusicBtn) initMusicBtn.innerText = "⏸️ Pause Musik";
+        }).catch(e => console.log("Autoplay blocked by browser policy", e));
+      } else {
+        bgMusic.pause();
+        floatingMusicBtn.innerText = "🎵";
+        if (initMusicBtn) initMusicBtn.innerText = "🎵 Putar Musik";
+      }
+    }
+
+    function openEnvelope() {
+      if (bgMusic.paused) {
+        bgMusic.currentTime = 0;
+        togglePlayMusic();
+      }
+      nextSlide(1);
+    }
+
+    function nextSlide(slideNumber) {
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const targetSlide = document.getElementById(`slide-${slideNumber}`);
+      if (targetSlide) {
+        targetSlide.classList.add('active');
+      }
+    }
+
+    function updateKangen(val) {
+      currentKangenValue = val;
+      const percentDisplay = document.getElementById('percentVal');
+      const emojiDisplay = document.getElementById('sliderEmoji');
+      const textDisplay = document.getElementById('kangenText');
+
+      percentDisplay.innerText = val + "%";
+
+      if (val < 100) {
+        emojiDisplay.innerText = "🙂";
+        textDisplay.innerText = "Dikit banget kangennya?";
+      } else if (val < 300) {
+        emojiDisplay.innerText = "😊";
+        textDisplay.innerText = "Lumayan kangen nih~";
+      } else if (val < 600) {
+        emojiDisplay.innerText = "🥰";
+        textDisplay.innerText = "Kangen banget dong pasti!";
+      } else if (val < 900) {
+        emojiDisplay.innerText = "😍";
+        textDisplay.innerText = "Gak sanggup nahan kangennya!";
+      } else {
+        emojiDisplay.innerText = "💥❤️";
+        textDisplay.innerText = "KANGEN BANGET TINGKAT DEWA!!";
+      }
+    }
+
+    function sendToInstagram() {
+      const message = encodeURIComponent(`Hai! Aku udah buka suratnya 💌\nTingkat kangen aku ke kamu itu: ${currentKangenValue}%! ❤️`);
+      window.open(`https://ig.me/m/${instagramUsername}?text=${message}`, '_blank');
+    }
+
+    function createParticles() {
+      const container = document.getElementById('particle-container');
+      const particles = ['❤️', '💖', '🌸', '✨', '💕'];
+      
+      setInterval(() => {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.innerText = particles[Math.floor(Math.random() * particles.length)];
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        particle.style.fontSize = (Math.random() * 0.8 + 1) + 'rem';
+        
+        container.appendChild(particle);
+
+        setTimeout(() => {
+          particle.remove();
+        }, 7000);
+      }, 450);
+    }
+
+    createParticles();
+  </script>
+</body>
+</html>
